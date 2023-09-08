@@ -11,29 +11,29 @@ data = {}
 
 # Fungsi untuk memasukkan data
 def masukkan_data():
-    key = input("Masukkan kunci data: ")
-    value = input("Masukkan nilai data: ")
-    data[key] = value
+    id_operator = input("Masukkan ID Opertor: ")
+    id_station_proses = input("Masukkan ID Station Proses: ")
+    data[id_operator] = id_station_proses
     print("Data berhasil dimasukkan.")
 
 # Fungsi untuk mengubah data
 def ubah_data():
-    key = input("Masukkan kunci data yang ingin diubah: ")
-    if key in data:
-        value = input("Masukkan nilai data baru: ")
-        data[key] = value
+    id_operator = input("Masukkan id operator yang ingin diubah: ")
+    if id_operator in data:
+        id_station_proses = input("Masukkan id station: ")
+        data[id_operator] = id_station_proses
         print("Data berhasil diubah.")
     else:
-        print("Kunci data tidak ditemukan.")
+        print("Id operator tidak ditemukan.")
 
 # Fungsi untuk menghapus data
 def hapus_data():
-    key = input("Masukkan kunci data yang ingin dihapus: ")
-    if key in data:
-        del data[key]
+    id_operator = input("Id operator yang ingin dihapus: ")
+    if id_operator in data:
+        del data[id_operator]
         print("Data berhasil dihapus.")
     else:
-        print("Kunci data tidak ditemukan.")
+        print("Id operator tidak ditemukan.")
 
 # Fungsi untuk melakukan scan barcode
 def scan_barcode():
@@ -44,19 +44,32 @@ def scan_barcode():
 def tampilkan_menu():
     print("Pilih menu:")
     print("1. Masukan Data")
-    print("2. Ubah Data")
-    print("3. Hapus Data")
-    print("4. Scan barcode")
-    print("5. Kirim Data")
-    print("6. Keluar")
+    print("2. Cari Data")
+    print("3. Ubah Data")
+    print("4. Hapus Data")
+    print("5. Scan barcode")
+    print("6. Kirim Data")
+    print("7. Keluar")
 
 # Fungsi untuk mengirim data
 def kirim_data():
     print("Data yang akan dikirim:")
-    for key, value in data.items():
-        print(f"{key}: {value}")
+    for id_operator, id_station in data.items():
+        print(f"{id_operator}: {id_station_proses}")
     print("Data berhasil dikirim.")
 
+# Fungsi untuk mencari data
+
+def cari_data():
+    kata_kunci = input("Masukkan kata kunci pencarian: ")
+    found = False
+    for id_operator, id_station_proses in data.items():
+        if kata_kunci.lower() in id_operator.lower() or kata_kunci.lower() in id_station_proses.lower():
+            print(f"ID Operator: {id_operator}, ID Station Proses: {id_station_proses}")
+            found = True
+    if not found:
+        print("Data tidak ditemukan.")
+    
 # Fungsi untuk menjalankan program utama
 def jalankan_program():
     while True:
@@ -66,14 +79,16 @@ def jalankan_program():
         if pilihan == "1":
             masukkan_data()
         elif pilihan == "2":
-            ubah_data()
+            cari_data()
         elif pilihan == "3":
-            hapus_data()
+            ubah_data()
         elif pilihan == "4":
-            scan_barcode()
+            hapus_data()
         elif pilihan == "5":
-            kirim_data()
+            scan_barcode()
         elif pilihan == "6":
+            kirim_data()
+        elif pilihan == "7":
             print("Program selesai.")
             break
         else:
@@ -82,7 +97,6 @@ def jalankan_program():
 # Jika modul ini dijalankan sebagai program utama, jalankan programnya
 if __name__ == "__main__":
     jalankan_program()
-
 
 # In[ ]:
 
